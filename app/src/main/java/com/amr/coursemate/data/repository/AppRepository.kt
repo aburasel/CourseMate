@@ -12,9 +12,15 @@ class AppRepository(private val db: AppDatabase) {
 
     fun getTranslationsForClass(classId: Long) = db.translationDao().getTranslationsForClass(classId)
 
-    suspend fun addClass(name: String) = db.courseClassDao().insert(CourseClass(name = name))
+    suspend fun addClass(name: String, description: String = "") = db.courseClassDao().insert(CourseClass(name = name, description = description))
 
     suspend fun deleteClass(courseClass: CourseClass) = db.courseClassDao().delete(courseClass)
+
+    suspend fun updateNameAndDescription(classId: Long, name: String, description: String) = 
+        db.courseClassDao().updateNameAndDescription(classId, name, description)
+
+    suspend fun updateDescription(classId: Long, description: String) = 
+        db.courseClassDao().updateDescription(classId, description)
 
     suspend fun updateNotes(classId: Long, notes: String) = db.courseClassDao().updateNotes(classId, notes)
 

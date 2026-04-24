@@ -16,6 +16,9 @@ interface CourseClassDao {
     @Insert
     suspend fun insert(courseClass: CourseClass): Long
 
+    @Update
+    suspend fun update(courseClass: CourseClass)
+
     @Delete
     suspend fun delete(courseClass: CourseClass)
 
@@ -24,4 +27,10 @@ interface CourseClassDao {
 
     @Query("UPDATE course_classes SET homework = :homework WHERE id = :id")
     suspend fun updateHomework(id: Long, homework: String)
+
+    @Query("UPDATE course_classes SET name = :name, description = :description WHERE id = :id")
+    suspend fun updateNameAndDescription(id: Long, name: String, description: String)
+
+    @Query("UPDATE course_classes SET description = :description WHERE id = :id")
+    suspend fun updateDescription(id: Long, description: String)
 }

@@ -1,9 +1,12 @@
 package com.amr.coursemate.ui.viewer
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.amr.coursemate.R
 import com.amr.coursemate.data.db.AppDatabase
 import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.ActivityClassViewerBinding
@@ -46,6 +49,27 @@ class ClassViewerActivity : AppCompatActivity() {
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) = updateTitle(position)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_class_viewer, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+        val position = binding.viewPager.currentItem
+        val classId = viewModel.allClasses.value?.getOrNull(position)?.id ?: return false
+        return when (menuItem.itemId) {
+            R.id.action_notes -> {
+                startActivity(NotesActivity.newIntent(this, classId))
+                true
+            }
+            R.id.action_homework -> {
+                startActivity(HomeworkActivity.newIntent(this, classId))
+                true
+            }
+            else -> super.onOptionsItemSelected(menuItem)
+        }
     }
 
     private fun updateTitle(position: Int) {

@@ -28,7 +28,11 @@ class ClassPageViewModel(private val repository: AppRepository, private val clas
         repository.updateHomework(classId, homework)
     }
 
-    class Factory(private val repository: AppRepository, private val classId: Long) : ViewModelProvider.Factory {
+    fun saveDescription(description: String) = viewModelScope.launch {
+        repository.updateDescription(classId, description)
+    }
+
+    class ClassPageViewModelFactory(private val repository: AppRepository, private val classId: Long) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T =
             ClassPageViewModel(repository, classId) as T

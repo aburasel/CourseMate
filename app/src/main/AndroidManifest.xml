@@ -27,6 +27,16 @@
         <activity
             android:name=".ui.viewer.ClassViewerActivity"
             android:exported="false"
+            android:theme="@style/Theme.CourseMate.NoActionBar"  />
+
+        <activity
+            android:name=".ui.viewer.NotesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CourseMate.NoActionBar" />
+
+        <activity
+            android:name=".ui.viewer.HomeworkActivity"
+            android:exported="false"
             android:theme="@style/Theme.CourseMate.NoActionBar" />
     </application>
 

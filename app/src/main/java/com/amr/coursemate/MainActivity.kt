@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amr.coursemate.data.db.AppDatabase
+import com.amr.coursemate.data.model.CourseClass
 import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.ActivityMainBinding
 import com.amr.coursemate.databinding.DialogAddClassBinding
@@ -36,12 +37,7 @@ class MainActivity : AppCompatActivity() {
                 )
             },
             onLongClick = { courseClass ->
-                MaterialAlertDialogBuilder(this)
-                    .setTitle("Delete class?")
-                    .setMessage("\"${courseClass.name}\" and all its translations will be deleted.")
-                    .setPositiveButton("Delete") { _, _ -> viewModel.deleteClass(courseClass) }
-                    .setNegativeButton("Cancel", null)
-                    .show()
+                showEditClassDialog(courseClass)
             }
         )
 
@@ -62,7 +58,32 @@ class MainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setPositiveButton("Add") { _, _ ->
                 val name = dialogBinding.etClassName.text?.toString()?.trim().orEmpty()
-                if (name.isNotEmpty()) viewModel.addClass(name)
+                val description = dialogBinding.etDescription.text?.toString()?.trim().orEmpty()
+                if (name.isNotEmpty()) viewModel.addClass(name, description)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showEditClassDialog(courseClass: CourseClass) {
+        val dialogBinding = DialogAddClassBinding.inflate(layoutInflater)
+        dialogBinding.etClassName.setText(courseClass.name)
+        dialogBinding.etDescription.setText(courseClass.description)
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Edit Class")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Save") { _, _ ->
+                val name = dialogBinding.etClassName.text?.toString()?.trim().orEmpty()
+                val description = dialogBinding.etDescription.text?.toString()?.trim().orEmpty()
+                if (name.isNotEmpty()) viewModel.updateClassNameAndDescription(courseClass.id, name, description)
+            }
+            .setNeutralButton("Delete") { _, _ ->
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Delete class?")
+                    .setMessage("\"${courseClass.name}\" and all its translations will be deleted.")
+                    .setPositiveButton("Delete") { _, _ -> viewModel.deleteClass(courseClass) }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             }
             .setNegativeButton("Cancel", null)
             .show()

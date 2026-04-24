@@ -23,6 +23,8 @@ class ClassAdapter(
     inner class ViewHolder(private val binding: ItemClassBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CourseClass, position: Int) {
             binding.tvClassName.text = item.name
+            binding.tvDescription.text = item.description
+            binding.tvDescription.visibility = if (item.description.isNotEmpty()) android.view.View.VISIBLE else android.view.View.GONE
             binding.root.setOnClickListener { onClick(item, position) }
             binding.root.setOnLongClickListener { onLongClick(item); true }
         }

@@ -11,12 +11,16 @@ class MainViewModel(private val repository: AppRepository) : ViewModel() {
 
     val allClasses = repository.allClasses
 
-    fun addClass(name: String) = viewModelScope.launch {
-        repository.addClass(name)
+    fun addClass(name: String, description: String = "") = viewModelScope.launch {
+        repository.addClass(name, description)
     }
 
     fun deleteClass(courseClass: CourseClass) = viewModelScope.launch {
         repository.deleteClass(courseClass)
+    }
+
+    fun updateClassNameAndDescription(classId: Long, name: String, description: String) = viewModelScope.launch {
+        repository.updateNameAndDescription(classId, name, description)
     }
 
     class Factory(private val repository: AppRepository) : ViewModelProvider.Factory {

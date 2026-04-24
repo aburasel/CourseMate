@@ -30,7 +30,13 @@ class ClassPageFragment : Fragment() {
     private val classId by lazy { requireArguments().getLong(ARG_CLASS_ID) }
 
     private val viewModel: ClassPageViewModel by viewModels {
-        ClassPageViewModel.Factory(AppRepository(AppDatabase.getInstance(requireContext())), classId)
+        ClassPageViewModel.ClassPageViewModelFactory(
+            AppRepository(
+                AppDatabase.getInstance(
+                    requireContext()
+                )
+            ), classId
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -55,17 +61,27 @@ class ClassPageFragment : Fragment() {
 
         viewModel.translations.observe(viewLifecycleOwner) { adapter.submitList(it) }
 
+        viewModel.courseClass.observe(viewLifecycleOwner) { courseClass ->
+            binding.tvDescription.text = courseClass?.description?.ifEmpty { "No description" }
+        }
+
         binding.fabAddTranslation.setOnClickListener { showAddTranslationDialog() }
-        binding.btnNotes.setOnClickListener {
-            showTextEditorDialog("Notes", viewModel.courseClass.value?.notes ?: "") { text ->
-                viewModel.saveNotes(text)
-            }
+        binding.btnEditDescription.setOnClickListener {
+            showDescriptionDialog()
         }
-        binding.btnHomework.setOnClickListener {
-            showTextEditorDialog("Homework", viewModel.courseClass.value?.homework ?: "") { text ->
-                viewModel.saveHomework(text)
+    }
+
+    private fun showDescriptionDialog() {
+        val dialogBinding = DialogTextEditorBinding.inflate(layoutInflater)
+        dialogBinding.etText.setText(viewModel.courseClass.value?.description ?: "")
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Description")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Save") { _, _ ->
+                viewModel.saveDescription(dialogBinding.etText.text?.toString().orEmpty())
             }
-        }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun showAddTranslationDialog() {
@@ -80,17 +96,6 @@ class ClassPageFragment : Fragment() {
                     viewModel.addTranslation(bangla, arabic)
                 }
             }
-            .setNegativeButton("Cancel", null)
-            .show()
-    }
-
-    private fun showTextEditorDialog(title: String, initialText: String, onSave: (String) -> Unit) {
-        val dialogBinding = DialogTextEditorBinding.inflate(layoutInflater)
-        dialogBinding.etText.setText(initialText)
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(title)
-            .setView(dialogBinding.root)
-            .setPositiveButton("Save") { _, _ -> onSave(dialogBinding.etText.text?.toString().orEmpty()) }
             .setNegativeButton("Cancel", null)
             .show()
     }
