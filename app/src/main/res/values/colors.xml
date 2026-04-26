@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Light theme — Maroon (#800000) seed -->
+    <color name="md_theme_light_primary">#800000</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#FFDAD6</color>
+    <color name="md_theme_light_onPrimaryContainer">#410002</color>
+    <color name="md_theme_light_secondary">#775652</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#FFDAD6</color>
+    <color name="md_theme_light_onSecondaryContainer">#2C1512</color>
+    <color name="md_theme_light_tertiary">#735B0C</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#FFDF8E</color>
+    <color name="md_theme_light_onTertiaryContainer">#251A00</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_background">#FFFBFF</color>
+    <color name="md_theme_light_onBackground">#201A1A</color>
+    <color name="md_theme_light_surface">#FFFBFF</color>
+    <color name="md_theme_light_onSurface">#201A1A</color>
+    <color name="md_theme_light_surfaceVariant">#F5DDDB</color>
+    <color name="md_theme_light_onSurfaceVariant">#534341</color>
+    <color name="md_theme_light_outline">#857371</color>
+    <color name="md_theme_light_outlineVariant">#D8C2C0</color>
+    <color name="md_theme_light_inverseSurface">#362F2E</color>
+    <color name="md_theme_light_inverseOnSurface">#FAEEED</color>
+    <color name="md_theme_light_inversePrimary">#FFB4AB</color>
+    <color name="md_theme_light_surfaceTint">#800000</color>
+    <color name="md_theme_light_scrim">#000000</color>
+
+    <!-- Dark theme — WhatsApp-inspired (dark blue-grey + teal) -->
+    <color name="md_theme_dark_primary">#1F2C34</color>
+    <color name="md_theme_dark_onPrimary">#E9EDEF</color>
+    <color name="md_theme_dark_primaryContainer">#005C4B</color>
+    <color name="md_theme_dark_onPrimaryContainer">#9EEEDD</color>
+    <color name="md_theme_dark_secondary">#00A884</color>
+    <color name="md_theme_dark_onSecondary">#003028</color>
+    <color name="md_theme_dark_secondaryContainer">#004034</color>
+    <color name="md_theme_dark_onSecondaryContainer">#9EEEDD</color>
+    <color name="md_theme_dark_tertiary">#8696A0</color>
+    <color name="md_theme_dark_onTertiary">#1F2C34</color>
+    <color name="md_theme_dark_tertiaryContainer">#374045</color>
+    <color name="md_theme_dark_onTertiaryContainer">#C7D9E3</color>
+    <color name="md_theme_dark_error">#FF5449</color>
+    <color name="md_theme_dark_onError">#FFFFFF</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_dark_background">#111B21</color>
+    <color name="md_theme_dark_onBackground">#E9EDEF</color>
+    <color name="md_theme_dark_surface">#1F2C34</color>
+    <color name="md_theme_dark_onSurface">#E9EDEF</color>
+    <color name="md_theme_dark_surfaceVariant">#222E35</color>
+    <color name="md_theme_dark_onSurfaceVariant">#8696A0</color>
+    <color name="md_theme_dark_outline">#374045</color>
+    <color name="md_theme_dark_outlineVariant">#2A373F</color>
+    <color name="md_theme_dark_inverseSurface">#E9EDEF</color>
+    <color name="md_theme_dark_inverseOnSurface">#1F2C34</color>
+    <color name="md_theme_dark_inversePrimary">#006A55</color>
+    <color name="md_theme_dark_scrim">#000000</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
