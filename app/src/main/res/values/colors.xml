@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Light theme — Maroon (#800000) seed -->
-    <color name="md_theme_light_primary">#800000</color>
+    <!-- Light theme — WhatsApp-inspired (teal + white) -->
+    <color name="md_theme_light_primary">#008069</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#FFDAD6</color>
-    <color name="md_theme_light_onPrimaryContainer">#410002</color>
-    <color name="md_theme_light_secondary">#775652</color>
+    <color name="md_theme_light_primaryContainer">#D9FDD3</color>
+    <color name="md_theme_light_onPrimaryContainer">#002117</color>
+    <color name="md_theme_light_secondary">#FFFFFF</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#FFDAD6</color>
-    <color name="md_theme_light_onSecondaryContainer">#2C1512</color>
-    <color name="md_theme_light_tertiary">#735B0C</color>
+    <color name="md_theme_light_secondaryContainer">#D1E8DF</color>
+    <color name="md_theme_light_onSecondaryContainer">#0B1F1A</color>
+    <color name="md_theme_light_tertiary">#4B6275</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
-    <color name="md_theme_light_tertiaryContainer">#FFDF8E</color>
-    <color name="md_theme_light_onTertiaryContainer">#251A00</color>
+    <color name="md_theme_light_tertiaryContainer">#CEE7FF</color>
+    <color name="md_theme_light_onTertiaryContainer">#041E2C</color>
     <color name="md_theme_light_error">#BA1A1A</color>
     <color name="md_theme_light_onError">#FFFFFF</color>
     <color name="md_theme_light_errorContainer">#FFDAD6</color>
     <color name="md_theme_light_onErrorContainer">#410002</color>
-    <color name="md_theme_light_background">#FFFBFF</color>
-    <color name="md_theme_light_onBackground">#201A1A</color>
-    <color name="md_theme_light_surface">#FFFBFF</color>
-    <color name="md_theme_light_onSurface">#201A1A</color>
-    <color name="md_theme_light_surfaceVariant">#F5DDDB</color>
-    <color name="md_theme_light_onSurfaceVariant">#534341</color>
-    <color name="md_theme_light_outline">#857371</color>
-    <color name="md_theme_light_outlineVariant">#D8C2C0</color>
-    <color name="md_theme_light_inverseSurface">#362F2E</color>
-    <color name="md_theme_light_inverseOnSurface">#FAEEED</color>
-    <color name="md_theme_light_inversePrimary">#FFB4AB</color>
-    <color name="md_theme_light_surfaceTint">#800000</color>
+    <color name="md_theme_light_background">#EFEFEF</color> <!-- the main background of body-->
+    <color name="md_theme_light_onBackground">#111B21</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#111B21</color>
+    <color name="md_theme_light_surfaceVariant">#F0F2F4</color>
+    <color name="md_theme_light_onSurfaceVariant">#667781</color>
+    <color name="md_theme_light_outline">#8696A0</color>
+    <color name="md_theme_light_outlineVariant">#C4C4C4</color>
+    <color name="md_theme_light_inverseSurface">#1F2C34</color>
+    <color name="md_theme_light_inverseOnSurface">#E9EDEF</color>
+    <color name="md_theme_light_inversePrimary">#00A884</color>
+    <color name="md_theme_light_surfaceTint">#008069</color>
     <color name="md_theme_light_scrim">#000000</color>
 
     <!-- Dark theme — WhatsApp-inspired (dark blue-grey + teal) -->
-    <color name="md_theme_dark_primary">#1F2C34</color>
-    <color name="md_theme_dark_onPrimary">#E9EDEF</color>
+    <color name="md_theme_dark_primary">#00A884</color>
+    <color name="md_theme_dark_onPrimary">#003028</color>
     <color name="md_theme_dark_primaryContainer">#005C4B</color>
     <color name="md_theme_dark_onPrimaryContainer">#9EEEDD</color>
     <color name="md_theme_dark_secondary">#00A884</color>
@@ -53,7 +53,7 @@
     <color name="md_theme_dark_surface">#1F2C34</color>
     <color name="md_theme_dark_onSurface">#E9EDEF</color>
     <color name="md_theme_dark_surfaceVariant">#222E35</color>
-    <color name="md_theme_dark_onSurfaceVariant">#8696A0</color>
+    <color name="md_theme_dark_onSurfaceVariant">#B2BCC3</color>
     <color name="md_theme_dark_outline">#374045</color>
     <color name="md_theme_dark_outlineVariant">#2A373F</color>
     <color name="md_theme_dark_inverseSurface">#E9EDEF</color>

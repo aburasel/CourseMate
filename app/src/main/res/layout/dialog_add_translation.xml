@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.App.TextInputLayout.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -15,25 +14,31 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etBangla"
+            style="@style/Widget.App.TextInputEditText"
             android:layout_width="match_parent"
+            android:minLines="2"
+            android:maxLength="255"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.App.TextInputLayout.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Arabic (عربي)">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etArabic"
+            style="@style/Widget.App.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textDirection="rtl"
-            android:gravity="end" />
+            android:minLines="2"
+            android:maxLength="255"
+            android:gravity="end"
+            android:inputType="textMultiLine"
+            android:textDirection="rtl" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

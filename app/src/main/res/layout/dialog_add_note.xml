@@ -4,21 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="8dp">
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.App.TextInputLayout.Rounded"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Note">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etText"
+            android:id="@+id/etNoteContent"
             style="@style/Widget.App.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:maxLength="255"
-            android:minLines="5"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="4"
+            android:maxLength="500"
             android:gravity="top|start" />
 
     </com.google.android.material.textfield.TextInputLayout>

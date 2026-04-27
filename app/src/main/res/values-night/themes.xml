@@ -30,8 +30,10 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
         <!-- Status bar: same dark surface as toolbar so icons are always visible -->
-        <item name="android:statusBarColor">@color/md_theme_dark_primary</item>
+        <item name="android:statusBarColor">@color/md_theme_dark_surface</item>
         <item name="android:windowLightStatusBar">false</item>
+<!--        <item name="android:windowLightStatusBar">false</item>-->
+<!--        <item name="android:statusBarColor">@color/black</item>-->
     </style>
 
     <style name="Theme.CourseMate.NoActionBar" parent="Theme.CourseMate">
@@ -40,4 +42,20 @@
     </style>
 
     <style name="Theme.CourseMate.Toolbar" parent="Theme.CourseMate.NoActionBar" />
+
+    <style name="Widget.App.TextInputLayout.Rounded" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">?attr/colorOnSurface</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="hintTextColor">?attr/colorPrimary</item>
+        <item name="startIconTint">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Custom Style for the actual EditText inside -->
+    <style name="Widget.App.TextInputEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:padding">16dp</item>
+    </style>
 </resources>

@@ -28,8 +28,10 @@
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
-        <item name="android:statusBarColor">@color/md_theme_light_primary</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:statusBarColor">@color/md_theme_light_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+<!--        <item name="android:windowLightStatusBar">true</item>-->
+<!--        <item name="android:statusBarColor">@color/white</item>-->
     </style>
 
     <style name="Theme.CourseMate.NoActionBar" parent="Theme.CourseMate">
@@ -39,7 +41,25 @@
 
     <style name="Theme.CourseMate.Toolbar" parent="Theme.CourseMate.NoActionBar" />
 
-    <style name="Theme.CourseMate.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.CourseMate.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.CourseMate.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Custom Style for TextInputLayout -->
+    <style name="Widget.App.TextInputLayout.Rounded" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/material_on_surface_stroke</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="hintTextColor">?attr/colorPrimary</item>
+        <item name="startIconTint">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Custom Style for the actual EditText inside -->
+    <style name="Widget.App.TextInputEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:padding">16dp</item>
+    </style>
+
 </resources>

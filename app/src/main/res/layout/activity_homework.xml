@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,9 +15,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:titleTextColor="?attr/colorOnPrimary"
-            app:navigationIconTint="?attr/colorOnPrimary"
+            android:background="?attr/colorSurface"
+            app:titleTextColor="?attr/colorOnSurface"
+            app:navigationIconTint="?attr/colorOnSurface"
             app:navigationIcon="?attr/homeAsUpIndicator" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -34,26 +34,39 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No homework yet. Tap the edit icon to add."
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:lineSpacingMultiplier="1.4"
                 android:textColor="?attr/colorOnBackground"
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true"
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEdit"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                style="@style/Widget.App.TextInputLayout.Rounded"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:hint="Homework"
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etText"
+                    style="@style/Widget.App.TextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:minLines="20"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:minLines="10"
                     android:gravity="top|start" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -61,24 +74,5 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:src="@android:drawable/ic_menu_edit"
-        app:tint="?attr/colorOnPrimary" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:src="@android:drawable/ic_menu_save"
-        android:visibility="gone"
-        app:tint="?attr/colorOnPrimary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

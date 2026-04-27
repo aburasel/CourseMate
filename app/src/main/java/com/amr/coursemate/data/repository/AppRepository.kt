@@ -2,6 +2,7 @@ package com.amr.coursemate.data.repository
 
 import com.amr.coursemate.data.db.AppDatabase
 import com.amr.coursemate.data.model.CourseClass
+import com.amr.coursemate.data.model.Note
 import com.amr.coursemate.data.model.Translation
 
 class AppRepository(private val db: AppDatabase) {
@@ -30,4 +31,13 @@ class AppRepository(private val db: AppDatabase) {
         db.translationDao().insert(Translation(classId = classId, bangla = bangla, arabic = arabic))
 
     suspend fun deleteTranslation(translation: Translation) = db.translationDao().delete(translation)
+
+    fun getNotesForClass(classId: Long) = db.noteDao().getNotesForClass(classId)
+
+    suspend fun addNote(classId: Long, content: String) =
+        db.noteDao().insert(Note(classId = classId, content = content))
+
+    suspend fun updateNote(note: Note) = db.noteDao().update(note)
+
+    suspend fun deleteNote(note: Note) = db.noteDao().delete(note)
 }

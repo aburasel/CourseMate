@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,27 +17,37 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorSurface"
             app:titleTextColor="?attr/colorOnSurface"
-            app:title="CourseMate" />
+            app:navigationIconTint="?attr/colorOnSurface"
+            app:navigationIcon="?attr/homeAsUpIndicator" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerClasses"
+        android:id="@+id/recyclerNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:layout_marginTop="8dp"
-        tools:listitem="@layout/item_class"
+        android:padding="8dp"
+        android:paddingBottom="88dp"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No notes yet"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:visibility="gone" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddClass"
+        android:id="@+id/fabAddNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:contentDescription="Add class"
+        android:contentDescription="Add note"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
