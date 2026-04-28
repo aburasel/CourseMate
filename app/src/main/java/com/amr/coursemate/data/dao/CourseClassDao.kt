@@ -10,8 +10,14 @@ interface CourseClassDao {
     @Query("SELECT * FROM course_classes ORDER BY id ASC")
     fun getAllClasses(): LiveData<List<CourseClass>>
 
+    @Query("SELECT * FROM course_classes ORDER BY id ASC")
+    suspend fun getAllList(): List<CourseClass>
+
     @Query("SELECT * FROM course_classes WHERE id = :id")
     fun getClassById(id: Long): LiveData<CourseClass?>
+
+    @Query("SELECT * FROM course_classes WHERE name = :name LIMIT 1")
+    suspend fun findByName(name: String): CourseClass?
 
     @Insert
     suspend fun insert(courseClass: CourseClass): Long

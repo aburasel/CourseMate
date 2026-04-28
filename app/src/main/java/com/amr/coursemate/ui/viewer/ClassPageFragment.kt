@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amr.coursemate.data.db.AppDatabase
+import com.amr.coursemate.data.model.Translation
 import com.amr.coursemate.data.repository.AppRepository
+import com.amr.coursemate.databinding.DialogAddNoteBinding
 import com.amr.coursemate.databinding.DialogAddTranslationBinding
 import com.amr.coursemate.databinding.DialogTextEditorBinding
 import com.amr.coursemate.databinding.FragmentClassPageBinding
@@ -31,11 +33,7 @@ class ClassPageFragment : Fragment() {
 
     private val viewModel: ClassPageViewModel by viewModels {
         ClassPageViewModel.ClassPageViewModelFactory(
-            AppRepository(
-                AppDatabase.getInstance(
-                    requireContext()
-                )
-            ), classId
+            AppRepository(AppDatabase.getInstance(requireContext())), classId
         )
     }
 
@@ -49,30 +47,57 @@ class ClassPageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = TranslationAdapter { translation ->
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete translation?")
-                .setMessage("\"${translation.bangla}\" will be removed.")
-                .setPositiveButton("Delete") { _, _ -> viewModel.deleteTranslation(translation) }
-                .setNegativeButton("Cancel", null)
-                .show()
-        }
+        val adapter = TranslationAdapter(
+            onLongClick = { translation ->
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete translation?")
+                    .setMessage("\"${translation.bangla}\" will be removed.")
+                    .setPositiveButton("Delete") { _, _ -> viewModel.deleteTranslation(translation) }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            },
+            onNoteClick = { translation, existingNote ->
+                if (existingNote != null) {
+                    startActivity(NotesActivity.newIntent(requireContext(), classId, existingNote.id))
+                } else {
+                    showAddNoteForTranslationDialog(translation)
+                }
+            }
+        )
 
         binding.recyclerTranslations.apply {
             this.adapter = adapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.translations.observe(viewLifecycleOwner) { adapter.submitList(it) }
+        viewModel.translationsWithNotes.observe(viewLifecycleOwner) { adapter.submitList(it) }
 
         viewModel.courseClass.observe(viewLifecycleOwner) { courseClass ->
             binding.tvDescription.text = courseClass?.description?.ifEmpty { "No description" }
         }
 
-        binding.fabAddTranslation.setOnClickListener { showAddTranslationDialog() }
-        binding.btnEditDescription.setOnClickListener {
-            showDescriptionDialog()
+        viewModel.newlyCreatedNoteId.observe(viewLifecycleOwner) { noteId ->
+            if (noteId != null) {
+                startActivity(NotesActivity.newIntent(requireContext(), classId, noteId))
+                viewModel.clearNewNoteId()
+            }
         }
+
+        binding.fabAddTranslation.setOnClickListener { showAddTranslationDialog() }
+        binding.btnEditDescription.setOnClickListener { showDescriptionDialog() }
+    }
+
+    private fun showAddNoteForTranslationDialog(translation: Translation) {
+        val dialogBinding = DialogAddNoteBinding.inflate(layoutInflater)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Add Note for \"${translation.bangla}\"")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Add") { _, _ ->
+                val content = dialogBinding.etNoteContent.text?.toString()?.trim().orEmpty()
+                if (content.isNotEmpty()) viewModel.addNoteForTranslation(translation.id, content)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun showDescriptionDialog() {

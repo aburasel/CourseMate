@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
-    app:cardElevation="1dp"
     app:strokeWidth="0dp"
     android:layout_marginVertical="4dp"
     app:cardCornerRadius="4dp">
@@ -20,8 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:background="@drawable/xml_border_bottom"
+            android:paddingVertical="8dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -29,18 +30,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15sp"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:lineSpacingMultiplier="1.3"
                 android:textColor="?attr/colorOnSurface"
                 android:gravity="start" />
 
+            <ImageButton
+                android:id="@+id/btnNote"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Note" />
+
         </LinearLayout>
 
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorOutlineVariant" />
 
         <!-- Arabic row — tinted background for visual distinction -->
         <LinearLayout
@@ -48,15 +54,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
-            android:background="?attr/colorSurfaceVariant"
+            android:paddingVertical="8dp"
+            android:background="?attr/colorSurface"
             android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/tvArabic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:lineSpacingMultiplier="1.4"
                 android:textColor="?attr/colorPrimary"
                 android:textDirection="rtl"

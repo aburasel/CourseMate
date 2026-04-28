@@ -2,6 +2,8 @@ package com.amr.coursemate
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +12,9 @@ import com.amr.coursemate.data.model.CourseClass
 import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.ActivityMainBinding
 import com.amr.coursemate.databinding.DialogAddClassBinding
+import com.amr.coursemate.ui.dictionary.DictionaryActivity
 import com.amr.coursemate.ui.home.ClassAdapter
+import com.amr.coursemate.ui.settings.SettingsActivity
 import com.amr.coursemate.ui.home.MainViewModel
 import com.amr.coursemate.ui.viewer.ClassViewerActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -51,6 +55,23 @@ class MainActivity : AppCompatActivity() {
         binding.fabAddClass.setOnClickListener { showAddClassDialog() }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_dictionary -> {
+            startActivity(Intent(this, DictionaryActivity::class.java))
+            true
+        }
+        R.id.action_settings -> {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
     private fun showAddClassDialog() {
         val dialogBinding = DialogAddClassBinding.inflate(layoutInflater)
         MaterialAlertDialogBuilder(this)
@@ -86,6 +107,14 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
             .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showAboutDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("About CourseMate")
+            .setMessage("CourseMate v1.0\n\nA simple app to manage your course notes and homework.")
+            .setPositiveButton("OK", null)
             .show()
     }
 }

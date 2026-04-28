@@ -18,15 +18,18 @@ class NotesActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_CLASS_ID = "class_id"
+        private const val EXTRA_SCROLL_TO_NOTE_ID = "scroll_to_note_id"
 
-        fun newIntent(context: Context, classId: Long) =
+        fun newIntent(context: Context, classId: Long, scrollToNoteId: Long? = null) =
             Intent(context, NotesActivity::class.java).apply {
                 putExtra(EXTRA_CLASS_ID, classId)
+                scrollToNoteId?.let { putExtra(EXTRA_SCROLL_TO_NOTE_ID, it) }
             }
     }
 
     private lateinit var binding: ActivityNotesBinding
     private val classId by lazy { intent.getLongExtra(EXTRA_CLASS_ID, 0L) }
+    private var scrollToNoteId: Long? = null
 
     private val viewModel: NotesViewModel by viewModels {
         NotesViewModel.Factory(AppRepository(AppDatabase.getInstance(this)), classId)
@@ -34,6 +37,7 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        scrollToNoteId = intent.getLongExtra(EXTRA_SCROLL_TO_NOTE_ID, -1L).takeIf { it != -1L }
         binding = ActivityNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -45,13 +49,21 @@ class NotesActivity : AppCompatActivity() {
             onLongClick = { note -> confirmDelete(note) }
         )
 
+        val layoutManager = LinearLayoutManager(this)
         binding.recyclerNotes.apply {
             this.adapter = adapter
-            layoutManager = LinearLayoutManager(this@NotesActivity)
+            this.layoutManager = layoutManager
         }
 
         viewModel.notes.observe(this) { notes ->
-            adapter.submitList(notes)
+            adapter.submitList(notes) {
+                val targetId = scrollToNoteId ?: return@submitList
+                val idx = notes.indexOfFirst { it.id == targetId }
+                if (idx >= 0) {
+                    layoutManager.scrollToPositionWithOffset(idx, 0)
+                    scrollToNoteId = null
+                }
+            }
             binding.tvEmpty.visibility = if (notes.isEmpty()) View.VISIBLE else View.GONE
         }
 
@@ -60,9 +72,7 @@ class NotesActivity : AppCompatActivity() {
 
     private fun showNoteDialog(existing: Note?) {
         val dialogBinding = DialogAddNoteBinding.inflate(layoutInflater)
-        existing?.let {
-            dialogBinding.etNoteContent.setText(it.content)
-        }
+        existing?.let { dialogBinding.etNoteContent.setText(it.content) }
         MaterialAlertDialogBuilder(this)
             .setTitle(if (existing == null) "New Note" else "Edit Note")
             .setView(dialogBinding.root)
@@ -78,12 +88,9 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun confirmDelete(note: Note) {
-        val label = if (note.content.isNotEmpty()) "\"${
-            note.content.substring(
-                0,
-                if (note.content.length > 10) 10 else note.content.length
-            )
-        }\".." else "This note"
+        val label = if (note.content.isNotEmpty())
+            "\"${note.content.take(10)}\".."
+        else "This note"
         MaterialAlertDialogBuilder(this)
             .setTitle("Delete note?")
             .setMessage("$label will be deleted.")

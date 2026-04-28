@@ -38,6 +38,16 @@
             android:name=".ui.viewer.HomeworkActivity"
             android:exported="false"
             android:theme="@style/Theme.CourseMate.NoActionBar" />
+
+        <activity
+            android:name=".ui.dictionary.DictionaryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CourseMate.NoActionBar" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CourseMate.NoActionBar" />
     </application>
 
 </manifest>
