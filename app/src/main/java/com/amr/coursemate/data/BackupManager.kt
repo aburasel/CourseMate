@@ -40,7 +40,6 @@ object BackupManager {
                     put("classId", n.classId)
                     put("content", n.content)
                     put("createdAt", n.createdAt)
-                    if (n.translationId != null) put("translationId", n.translationId)
                 })
             }
         })
@@ -87,9 +86,7 @@ object BackupManager {
                 id = o.getLong("id"),
                 classId = o.getLong("classId"),
                 content = o.getString("content"),
-                createdAt = o.getLong("createdAt"),
-                translationId = if (o.has("translationId") && !o.isNull("translationId"))
-                    o.getLong("translationId") else null
+                createdAt = o.getLong("createdAt")
             )
         }
 

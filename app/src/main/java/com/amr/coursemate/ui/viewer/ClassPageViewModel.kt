@@ -6,29 +6,11 @@ import com.amr.coursemate.data.model.Translation
 import com.amr.coursemate.data.repository.AppRepository
 import kotlinx.coroutines.launch
 
-class ClassPageViewModel(private val repository: AppRepository, private val classId: Long) : ViewModel() {
+class ClassPageViewModel(private val repository: AppRepository, private val classId: Long) :
+    ViewModel() {
 
     val translations = repository.getTranslationsForClass(classId)
     val courseClass = repository.getClassById(classId)
-    private val notes = repository.getNotesForClass(classId)
-
-    val translationsWithNotes: LiveData<List<TranslationWithNote>> =
-        MediatorLiveData<List<TranslationWithNote>>().apply {
-            var latestTranslations: List<Translation> = emptyList()
-            var latestNotes: List<Note> = emptyList()
-
-            fun combine() {
-                val noteMap = latestNotes
-                    .filter { it.translationId != null }
-                    .associateBy { it.translationId!! }
-                value = latestTranslations.map { t -> TranslationWithNote(t, noteMap[t.id]) }
-            }
-
-            addSource(translations) { latestTranslations = it ?: emptyList(); combine() }
-            addSource(notes) { latestNotes = it ?: emptyList(); combine() }
-        }
-
-    val newlyCreatedNoteId = MutableLiveData<Long?>(null)
 
     fun addTranslation(bangla: String, arabic: String) = viewModelScope.launch {
         repository.addTranslation(classId, bangla, arabic)
@@ -38,16 +20,10 @@ class ClassPageViewModel(private val repository: AppRepository, private val clas
         repository.deleteTranslation(translation)
     }
 
-    fun addNoteForTranslation(translationId: Long, content: String) = viewModelScope.launch {
-        val noteId = repository.addNoteForTranslation(classId, translationId, content)
-        newlyCreatedNoteId.postValue(noteId)
-    }
-
-    fun clearNewNoteId() { newlyCreatedNoteId.value = null }
-
-    fun saveNotes(notes: String) = viewModelScope.launch {
-        repository.updateNotes(classId, notes)
-    }
+    fun updateTranslation(translation: Translation, arabic: String, bangla: String) =
+        viewModelScope.launch {
+            repository.updateTranslation(translation.copy(arabic = arabic, bangla = bangla))
+        }
 
     fun saveHomework(homework: String) = viewModelScope.launch {
         repository.updateHomework(classId, homework)
@@ -57,7 +33,10 @@ class ClassPageViewModel(private val repository: AppRepository, private val clas
         repository.updateDescription(classId, description)
     }
 
-    class ClassPageViewModelFactory(private val repository: AppRepository, private val classId: Long) : ViewModelProvider.Factory {
+    class ClassPageViewModelFactory(
+        private val repository: AppRepository,
+        private val classId: Long
+    ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T =
             ClassPageViewModel(repository, classId) as T

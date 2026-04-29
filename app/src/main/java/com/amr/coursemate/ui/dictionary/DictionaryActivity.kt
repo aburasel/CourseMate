@@ -15,6 +15,7 @@ import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.ActivityDictionaryBinding
 import com.amr.coursemate.databinding.DialogAddWordBinding
 import com.amr.coursemate.databinding.DialogBatchAddBinding
+import com.amr.coursemate.ui.adjustForKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DictionaryActivity : AppCompatActivity() {
@@ -104,6 +105,7 @@ class DictionaryActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+            .adjustForKeyboard()
     }
 
     private fun showBatchAddDialog() {
@@ -126,5 +128,6 @@ class DictionaryActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+            .adjustForKeyboard()
     }
 }

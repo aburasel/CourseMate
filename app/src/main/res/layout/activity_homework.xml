@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -23,8 +22,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -37,8 +38,8 @@
                 android:id="@+id/tvEmpty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No homework yet. Tap the edit icon to add."
-                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:text="@string/no_homework_yet_tap_the_edit_icon_to_add"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:visibility="gone" />
 
@@ -46,7 +47,7 @@
                 android:id="@+id/tvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:lineSpacingMultiplier="1.4"
                 android:textColor="?attr/colorOnBackground"
                 android:textIsSelectable="true"
@@ -57,7 +58,7 @@
                 style="@style/Widget.App.TextInputLayout.Rounded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Homework"
+                android:hint="@string/homework"
                 android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -65,8 +66,9 @@
                     style="@style/Widget.App.TextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:minLines="10"
+                    android:minLines="5"
                     android:gravity="top|start" />
 
             </com.google.android.material.textfield.TextInputLayout>

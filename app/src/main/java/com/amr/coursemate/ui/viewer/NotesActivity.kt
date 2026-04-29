@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.amr.coursemate.data.db.AppDatabase
 import com.amr.coursemate.data.model.Note
 import com.amr.coursemate.data.repository.AppRepository
+import com.amr.coursemate.ui.adjustForKeyboard
 import com.amr.coursemate.databinding.ActivityNotesBinding
 import com.amr.coursemate.databinding.DialogAddNoteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -18,12 +19,12 @@ class NotesActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_CLASS_ID = "class_id"
-        private const val EXTRA_SCROLL_TO_NOTE_ID = "scroll_to_note_id"
+        //private const val EXTRA_SCROLL_TO_NOTE_ID = "scroll_to_note_id"
 
         fun newIntent(context: Context, classId: Long, scrollToNoteId: Long? = null) =
             Intent(context, NotesActivity::class.java).apply {
                 putExtra(EXTRA_CLASS_ID, classId)
-                scrollToNoteId?.let { putExtra(EXTRA_SCROLL_TO_NOTE_ID, it) }
+                //scrollToNoteId?.let { putExtra(EXTRA_SCROLL_TO_NOTE_ID, it) }
             }
     }
 
@@ -37,7 +38,7 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        scrollToNoteId = intent.getLongExtra(EXTRA_SCROLL_TO_NOTE_ID, -1L).takeIf { it != -1L }
+        //scrollToNoteId = intent.getLongExtra(EXTRA_SCROLL_TO_NOTE_ID, -1L).takeIf { it != -1L }
         binding = ActivityNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -56,14 +57,7 @@ class NotesActivity : AppCompatActivity() {
         }
 
         viewModel.notes.observe(this) { notes ->
-            adapter.submitList(notes) {
-                val targetId = scrollToNoteId ?: return@submitList
-                val idx = notes.indexOfFirst { it.id == targetId }
-                if (idx >= 0) {
-                    layoutManager.scrollToPositionWithOffset(idx, 0)
-                    scrollToNoteId = null
-                }
-            }
+            adapter.submitList(notes)
             binding.tvEmpty.visibility = if (notes.isEmpty()) View.VISIBLE else View.GONE
         }
 
@@ -85,6 +79,7 @@ class NotesActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+            .adjustForKeyboard()
     }
 
     private fun confirmDelete(note: Note) {

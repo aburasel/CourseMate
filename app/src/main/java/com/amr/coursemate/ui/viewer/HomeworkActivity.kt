@@ -8,6 +8,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.amr.coursemate.R
 import com.amr.coursemate.data.db.AppDatabase
 import com.amr.coursemate.data.repository.AppRepository
@@ -38,8 +42,21 @@ class HomeworkActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityHomeworkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout) { v, insets ->
+            v.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top)
+            insets
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.nestedScrollView) { v, insets ->
+            val navBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            val imeBottom = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+            v.updatePadding(bottom = maxOf(navBottom, imeBottom))
+            insets
+        }
+
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Homework"

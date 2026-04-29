@@ -2,6 +2,7 @@ package com.amr.coursemate.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.amr.coursemate.data.model.Note
 import com.amr.coursemate.data.model.Translation
 
 @Dao
@@ -18,6 +19,12 @@ interface TranslationDao {
 
     @Insert
     suspend fun insert(translation: Translation): Long
+
+    @Query("UPDATE translations SET bangla = :bangla AND arabic = :arabic WHERE id = :id")
+    suspend fun updateTranslation(id: Long, bangla: String, arabic:String)
+
+    @Update
+    suspend fun update(translation: Translation)
 
     @Delete
     suspend fun delete(translation: Translation)

@@ -1,75 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
-    app:strokeWidth="0dp"
     android:layout_marginVertical="4dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    app:strokeWidth="0dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:orientation="vertical">
 
-        <!-- Bangla row -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvBangla"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="8dp"
+            android:layout_weight="1"
             android:background="@drawable/xml_border_bottom"
+            android:lineSpacingMultiplier="1.3"
+            android:paddingHorizontal="8dp"
             android:paddingVertical="8dp"
-            android:gravity="center_vertical">
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvBangla"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:lineSpacingMultiplier="1.3"
-                android:textColor="?attr/colorOnSurface"
-                android:gravity="start" />
+        <ImageButton
+            android:id="@+id/btnEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/edit"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_edit_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorOnSurface" />
 
-            <ImageButton
-                android:id="@+id/btnNote"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="4dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="2dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="Note" />
-
-        </LinearLayout>
-
-
-        <!-- Arabic row — tinted background for visual distinction -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvArabic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:background="?attr/colorSurface"
-            android:gravity="center_vertical">
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:lineSpacingMultiplier="1.4"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textColor="?attr/colorPrimary"
+            android:textDirection="rtl"
+            app:layout_constraintTop_toBottomOf="@+id/tvBangla"
+            tools:layout_editor_absoluteX="8dp" />
 
-            <TextView
-                android:id="@+id/tvArabic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
-                android:lineSpacingMultiplier="1.4"
-                android:textColor="?attr/colorPrimary"
-                android:textDirection="rtl"
-                android:fontFamily="serif" />
 
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

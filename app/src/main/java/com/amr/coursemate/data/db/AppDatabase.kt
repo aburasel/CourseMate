@@ -17,7 +17,7 @@ import com.amr.coursemate.data.model.Translation
 
 @Database(
     entities = [CourseClass::class, Translation::class, Note::class, Dictionary::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -31,12 +31,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        private val MIGRATION_2_3 = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE notes ADD COLUMN translationId INTEGER")
-            }
-        }
-
         fun getInstance(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 Room.databaseBuilder(
@@ -44,7 +38,6 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "coursemate.db"
                 )
-                    .addMigrations(MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
                     .build()
                     .also { INSTANCE = it }

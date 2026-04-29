@@ -19,6 +19,5 @@ data class Note(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val classId: Long,
     val content: String,
-    val createdAt: Long = System.currentTimeMillis(),
-    val translationId: Long? = null
+    val createdAt: Long = System.currentTimeMillis()
 )

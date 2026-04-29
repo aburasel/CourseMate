@@ -16,6 +16,8 @@ import com.amr.coursemate.ui.dictionary.DictionaryActivity
 import com.amr.coursemate.ui.home.ClassAdapter
 import com.amr.coursemate.ui.settings.SettingsActivity
 import com.amr.coursemate.ui.home.MainViewModel
+import com.amr.coursemate.ui.about.AboutActivity
+import com.amr.coursemate.ui.adjustForKeyboard
 import com.amr.coursemate.ui.viewer.ClassViewerActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -69,6 +71,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingsActivity::class.java))
             true
         }
+        R.id.action_about -> {
+            startActivity(Intent(this, AboutActivity::class.java))
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -84,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+            .adjustForKeyboard()
     }
 
     private fun showEditClassDialog(courseClass: CourseClass) {
@@ -108,13 +115,7 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+            .adjustForKeyboard()
     }
 
-    private fun showAboutDialog() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("About CourseMate")
-            .setMessage("CourseMate v1.0\n\nA simple app to manage your course notes and homework.")
-            .setPositiveButton("OK", null)
-            .show()
-    }
 }

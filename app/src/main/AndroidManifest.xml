@@ -48,6 +48,11 @@
             android:name=".ui.settings.SettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.CourseMate.NoActionBar" />
+
+        <activity
+            android:name=".ui.about.AboutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CourseMate.NoActionBar" />
     </application>
 
 </manifest>

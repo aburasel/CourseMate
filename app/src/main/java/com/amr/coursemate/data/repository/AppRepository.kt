@@ -35,13 +35,12 @@ class AppRepository(private val db: AppDatabase) {
 
     suspend fun deleteTranslation(translation: Translation) = db.translationDao().delete(translation)
 
+    suspend fun updateTranslation(translation: Translation) = db.translationDao().update(translation)
+
     fun getNotesForClass(classId: Long) = db.noteDao().getNotesForClass(classId)
 
     suspend fun addNote(classId: Long, content: String) =
         db.noteDao().insert(Note(classId = classId, content = content))
-
-    suspend fun addNoteForTranslation(classId: Long, translationId: Long, content: String): Long =
-        db.noteDao().insert(Note(classId = classId, translationId = translationId, content = content))
 
     suspend fun updateNote(note: Note) = db.noteDao().update(note)
 
@@ -84,26 +83,22 @@ class AppRepository(private val db: AppDatabase) {
             }
         }
 
-        // Pass 2: translations — deduplicate by (classId, bangla, arabic), build id remap
-        val translationIdMap = mutableMapOf<Long, Long>()
+        // Pass 2: translations — deduplicate by (classId, bangla, arabic)
         for (tr in data.translations) {
             val localClassId = classIdMap[tr.classId] ?: continue
             val existing = db.translationDao().findByContent(localClassId, tr.bangla, tr.arabic)
-            if (existing != null) {
-                translationIdMap[tr.id] = existing.id
-            } else {
-                translationIdMap[tr.id] = db.translationDao().insert(tr.copy(id = 0, classId = localClassId))
+            if (existing == null) {
+                db.translationDao().insert(tr.copy(id = 0, classId = localClassId))
                 translationsAdded++
             }
         }
 
-        // Pass 3: notes — deduplicate by (classId, content), remap translationId
+        // Pass 3: notes — deduplicate by (classId, content)
         for (note in data.notes) {
             val localClassId = classIdMap[note.classId] ?: continue
             val existing = db.noteDao().findByContent(localClassId, note.content)
             if (existing == null) {
-                val localTranslationId = note.translationId?.let { translationIdMap[it] }
-                db.noteDao().insert(note.copy(id = 0, classId = localClassId, translationId = localTranslationId))
+                db.noteDao().insert(note.copy(id = 0, classId = localClassId))
                 notesAdded++
             }
         }

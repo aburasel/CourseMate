@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Arabic Word"
-        android:layout_marginBottom="12dp"
-        style="@style/Widget.App.TextInputLayout.Rounded">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etArabic"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textDirection="rtl"
-            android:gravity="end"
-            android:textSize="18sp" />
+            android:hint="@string/arabic_word"
+            android:layout_marginBottom="12dp"
+            style="@style/Widget.App.TextInputLayout.Rounded">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etArabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textDirection="rtl"
+                android:gravity="end"
+                android:textSize="18sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Meaning"
-        style="@style/Widget.App.TextInputLayout.Rounded">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMeaning"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:hint="@string/meaning"
+            style="@style/Widget.App.TextInputLayout.Rounded">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMeaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
-</LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+</ScrollView>
