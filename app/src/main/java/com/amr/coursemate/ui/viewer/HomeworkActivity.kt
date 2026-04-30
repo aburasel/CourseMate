@@ -53,7 +53,8 @@ class HomeworkActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.nestedScrollView) { v, insets ->
             val navBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
             val imeBottom = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-            v.updatePadding(bottom = maxOf(navBottom, imeBottom))
+            val newBottom = maxOf(navBottom, imeBottom)
+            if (v.paddingBottom != newBottom) v.updatePadding(bottom = newBottom)
             insets
         }
 
@@ -97,6 +98,8 @@ class HomeworkActivity : AppCompatActivity() {
         binding.tvContent.visibility = View.GONE
         binding.tvEmpty.visibility = View.GONE
         binding.tilEdit.visibility = View.VISIBLE
+        binding.tilEdit.isVerticalScrollBarEnabled = true
+        binding.etText.movementMethod = android.text.method.ScrollingMovementMethod()
         menuEdit?.isVisible = false
         menuSave?.isVisible = true
         binding.etText.requestFocus()
