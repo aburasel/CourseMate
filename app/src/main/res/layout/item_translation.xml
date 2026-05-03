@@ -26,20 +26,19 @@
             android:paddingVertical="8dp"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorOnSurface"
-            app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+            app:layout_constraintEnd_toStartOf="@+id/btnCopy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btnEdit"
+            android:id="@+id/btnCopy"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/edit"
+            android:contentDescription="@string/copy_note"
             android:padding="2dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_edit_24dp"
+            app:srcCompat="@drawable/ic_content_copy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorOnSurface" />

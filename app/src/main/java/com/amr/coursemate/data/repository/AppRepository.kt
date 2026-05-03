@@ -7,6 +7,7 @@ import com.amr.coursemate.data.model.Dictionary
 import com.amr.coursemate.data.model.ImportResult
 import com.amr.coursemate.data.model.Note
 import com.amr.coursemate.data.model.Translation
+import com.amr.coursemate.data.model.TranslationWithClass
 
 class AppRepository(private val db: AppDatabase) {
 
@@ -34,6 +35,9 @@ class AppRepository(private val db: AppDatabase) {
         db.translationDao().insert(Translation(classId = classId, bangla = bangla, arabic = arabic))
 
     suspend fun deleteTranslation(translation: Translation) = db.translationDao().delete(translation)
+
+    suspend fun searchTranslations(query: String, limit: Int, offset: Int): List<TranslationWithClass> =
+        db.translationDao().searchWithClass(query, limit, offset)
 
     suspend fun updateTranslation(translation: Translation) = db.translationDao().update(translation)
 

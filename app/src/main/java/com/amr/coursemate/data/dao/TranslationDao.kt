@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.amr.coursemate.data.model.Note
 import com.amr.coursemate.data.model.Translation
+import com.amr.coursemate.data.model.TranslationWithClass
 
 @Dao
 interface TranslationDao {
@@ -28,4 +29,14 @@ interface TranslationDao {
 
     @Delete
     suspend fun delete(translation: Translation)
+
+    @Query("""
+        SELECT t.id, t.classId, t.bangla, t.arabic, c.name AS className
+        FROM translations t
+        INNER JOIN course_classes c ON t.classId = c.id
+        WHERE (:query = '' OR t.bangla LIKE '%' || :query || '%' OR t.arabic LIKE '%' || :query || '%')
+        ORDER BY c.name ASC, t.id ASC
+        LIMIT :limit OFFSET :offset
+    """)
+    suspend fun searchWithClass(query: String, limit: Int, offset: Int): List<TranslationWithClass>
 }

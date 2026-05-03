@@ -30,4 +30,7 @@
     <string name="no_homework_yet_tap_the_edit_icon_to_add">No homework yet. Tap the edit icon to add.</string>
     <string name="arabic_word">Arabic Word</string>
     <string name="meaning">Meaning</string>
+    <string name="copy_note">Copy note</string>
+    <string name="save">Save</string>
+    <string name="copy">Copy</string>
 </resources>

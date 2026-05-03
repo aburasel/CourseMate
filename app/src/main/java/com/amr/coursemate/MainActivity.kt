@@ -13,6 +13,7 @@ import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.ActivityMainBinding
 import com.amr.coursemate.databinding.DialogAddClassBinding
 import com.amr.coursemate.ui.dictionary.DictionaryActivity
+import com.amr.coursemate.ui.search.SearchActivity
 import com.amr.coursemate.ui.home.ClassAdapter
 import com.amr.coursemate.ui.settings.SettingsActivity
 import com.amr.coursemate.ui.home.MainViewModel
@@ -63,6 +64,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_search -> {
+            startActivity(Intent(this, SearchActivity::class.java))
+            true
+        }
         R.id.action_dictionary -> {
             startActivity(Intent(this, DictionaryActivity::class.java))
             true

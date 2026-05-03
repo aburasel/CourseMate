@@ -1,7 +1,11 @@
 package com.amr.coursemate.ui.viewer
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +24,13 @@ class TranslationAdapter(
             binding.tvBangla.text = item.bangla
             binding.tvArabic.text = item.arabic
             binding.root.setOnLongClickListener { onLongClick(item); true }
-            binding.btnEdit.setOnClickListener { onEditClick(item) }
+            binding.root.setOnClickListener { onEditClick(item) }
+            binding.btnCopy.setOnClickListener {
+                val text = "${item.bangla}\n${item.arabic}"
+                val clipboard = it.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                clipboard.setPrimaryClip(ClipData.newPlainText("translation", text))
+                Toast.makeText(it.context, "Copied", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

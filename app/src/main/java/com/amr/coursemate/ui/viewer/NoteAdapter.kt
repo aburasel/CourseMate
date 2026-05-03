@@ -1,8 +1,12 @@
 package com.amr.coursemate.ui.viewer
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +41,11 @@ class NoteAdapter(
             binding.tvNoteDate.text = DATE_FORMAT.format(Date(note.createdAt))
             binding.root.setOnClickListener { onClick(note) }
             binding.root.setOnLongClickListener { onLongClick(note); true }
+            binding.btnCopyNote.setOnClickListener {
+                val clipboard = it.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                clipboard.setPrimaryClip(ClipData.newPlainText("note", note.content))
+                Toast.makeText(it.context, "Copied", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

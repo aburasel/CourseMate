@@ -1,11 +1,14 @@
 package com.amr.coursemate.ui.viewer
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -32,6 +35,8 @@ class HomeworkActivity : AppCompatActivity() {
     private val classId by lazy { intent.getLongExtra(EXTRA_CLASS_ID, 0L) }
     private var menuEdit: MenuItem? = null
     private var menuSave: MenuItem? = null
+    private var menuCopy: MenuItem? = null
+    private var currentHomework = ""
 
     private val viewModel: ClassPageViewModel by viewModels {
         ClassPageViewModel.ClassPageViewModelFactory(
@@ -71,6 +76,8 @@ class HomeworkActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_homework, menu)
         menuEdit = menu.findItem(R.id.action_edit)
         menuSave = menu.findItem(R.id.action_save)
+        menuCopy = menu.findItem(R.id.action_copy)
+        menuCopy?.isVisible = currentHomework.isNotEmpty()
         return true
     }
 
@@ -78,11 +85,13 @@ class HomeworkActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_edit -> { enterEditMode(); true }
             R.id.action_save -> { saveAndExitEditMode(); true }
+            R.id.action_copy -> { copyHomework(); true }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     private fun showReadMode(homework: String) {
+        currentHomework = homework
         val hasContent = homework.isNotEmpty()
         binding.tvContent.text = homework
         binding.tvContent.visibility = if (hasContent) View.VISIBLE else View.GONE
@@ -90,6 +99,15 @@ class HomeworkActivity : AppCompatActivity() {
         binding.tilEdit.visibility = View.GONE
         menuEdit?.isVisible = true
         menuSave?.isVisible = false
+        menuCopy?.isVisible = hasContent
+    }
+
+    private fun copyHomework() {
+        val text = viewModel.courseClass.value?.homework.orEmpty()
+        if (text.isEmpty()) return
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("homework", text))
+        Toast.makeText(this, "Copied", Toast.LENGTH_SHORT).show()
     }
 
     private fun enterEditMode() {
