@@ -48,7 +48,7 @@
                 android:id="@+id/tvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:lineSpacingMultiplier="1.4"
                 android:textColor="?attr/colorOnBackground"
                 android:textIsSelectable="true"
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="always"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
                     android:inputType="textMultiLine|textCapSentences"
                     android:gravity="top|start" />
 
