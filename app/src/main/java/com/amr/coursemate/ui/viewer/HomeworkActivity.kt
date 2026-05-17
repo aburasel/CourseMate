@@ -116,11 +116,11 @@ class HomeworkActivity : AppCompatActivity() {
         binding.tvContent.visibility = View.GONE
         binding.tvEmpty.visibility = View.GONE
         binding.tilEdit.visibility = View.VISIBLE
-        binding.tilEdit.isVerticalScrollBarEnabled = true
-        binding.etText.movementMethod = android.text.method.ScrollingMovementMethod()
         menuEdit?.isVisible = false
         menuSave?.isVisible = true
-        binding.etText.requestFocus()
+        binding.etText.postDelayed({
+            binding.etText.requestFocus()
+        }, 200)
     }
 
     private fun saveAndExitEditMode() {

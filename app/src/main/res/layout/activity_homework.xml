@@ -69,6 +69,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="always"
+                    android:textIsSelectable="true"
+                    android:longClickable="true"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
                     android:inputType="textMultiLine|textCapSentences"
                     android:gravity="top|start" />
