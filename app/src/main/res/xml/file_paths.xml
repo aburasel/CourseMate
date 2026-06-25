@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Temporary photos captured for OCR live in cacheDir/images/. -->
+    <cache-path
+        name="ocr_images"
+        path="images/" />
+</paths>
