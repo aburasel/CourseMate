@@ -21,7 +21,7 @@
                 style="@style/Widget.App.TextInputEditText"
                 android:layout_width="match_parent"
                 android:minLines="2"
-                android:maxLength="255"
+                android:maxLength="512"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
-                android:maxLength="255"
+                android:maxLength="512"
                 android:gravity="end"
                 android:inputType="textMultiLine"
                 android:textDirection="rtl" />

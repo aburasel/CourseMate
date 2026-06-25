@@ -30,7 +30,7 @@
             style="@style/Widget.App.TextInputLayout.Rounded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="255"
+            android:maxLength="512"
             android:layout_marginTop="12dp"
             android:hint="Description (optional)">
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
-                android:maxLength="255"
+                android:maxLength="512"
                 android:minLines="2" />
 
         </com.google.android.material.textfield.TextInputLayout>

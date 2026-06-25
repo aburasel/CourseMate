@@ -61,3 +61,9 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+# ── Tesseract OCR (tesseract4android) ─────────────────────────────────────────
+# The native library calls back into these classes via JNI by name, so R8 must
+# not rename or remove them or their members.
+-keep class com.googlecode.tesseract.android.** { *; }
+-keep class com.googlecode.leptonica.android.** { *; }

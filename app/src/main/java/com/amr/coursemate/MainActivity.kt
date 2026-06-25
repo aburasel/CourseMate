@@ -19,6 +19,8 @@ import com.amr.coursemate.ui.settings.SettingsActivity
 import com.amr.coursemate.ui.home.MainViewModel
 import com.amr.coursemate.ui.about.AboutActivity
 import com.amr.coursemate.ui.adjustForKeyboard
+import com.amr.coursemate.ui.overview.AllHomeworkActivity
+import com.amr.coursemate.ui.overview.AllNotesActivity
 import com.amr.coursemate.ui.viewer.ClassViewerActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -70,6 +72,14 @@ class MainActivity : AppCompatActivity() {
         }
         R.id.action_dictionary -> {
             startActivity(Intent(this, DictionaryActivity::class.java))
+            true
+        }
+        R.id.action_all_notes -> {
+            startActivity(Intent(this, AllNotesActivity::class.java))
+            true
+        }
+        R.id.action_all_homework -> {
+            startActivity(Intent(this, AllHomeworkActivity::class.java))
             true
         }
         R.id.action_settings -> {

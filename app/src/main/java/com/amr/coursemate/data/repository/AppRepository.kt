@@ -34,6 +34,11 @@ class AppRepository(private val db: AppDatabase) {
     suspend fun addTranslation(classId: Long, bangla: String, arabic: String) =
         db.translationDao().insert(Translation(classId = classId, bangla = bangla, arabic = arabic))
 
+    suspend fun addTranslations(classId: Long, pairs: List<Pair<String, String>>) =
+        db.translationDao().insertAll(
+            pairs.map { (bangla, arabic) -> Translation(classId = classId, bangla = bangla, arabic = arabic) }
+        )
+
     suspend fun deleteTranslation(translation: Translation) = db.translationDao().delete(translation)
 
     suspend fun searchTranslations(query: String, limit: Int, offset: Int): List<TranslationWithClass> =
@@ -42,6 +47,10 @@ class AppRepository(private val db: AppDatabase) {
     suspend fun updateTranslation(translation: Translation) = db.translationDao().update(translation)
 
     fun getNotesForClass(classId: Long) = db.noteDao().getNotesForClass(classId)
+
+    fun getAllNotesWithClass() = db.noteDao().getAllNotesWithClass()
+
+    fun getClassesWithHomework() = db.courseClassDao().getClassesWithHomework()
 
     suspend fun addNote(classId: Long, content: String) =
         db.noteDao().insert(Note(classId = classId, content = content))

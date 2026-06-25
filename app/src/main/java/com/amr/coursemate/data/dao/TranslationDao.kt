@@ -21,6 +21,9 @@ interface TranslationDao {
     @Insert
     suspend fun insert(translation: Translation): Long
 
+    @Insert
+    suspend fun insertAll(translations: List<Translation>)
+
     @Query("UPDATE translations SET bangla = :bangla AND arabic = :arabic WHERE id = :id")
     suspend fun updateTranslation(id: Long, bangla: String, arabic:String)
 

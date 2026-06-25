@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +12,11 @@ import com.amr.coursemate.data.db.AppDatabase
 import com.amr.coursemate.data.model.Translation
 import com.amr.coursemate.data.repository.AppRepository
 import com.amr.coursemate.databinding.DialogAddTranslationBinding
+import com.amr.coursemate.databinding.DialogBatchTranslationBinding
 import com.amr.coursemate.databinding.DialogTextEditorBinding
 import com.amr.coursemate.databinding.FragmentClassPageBinding
 import com.amr.coursemate.ui.adjustForKeyboard
+import com.amr.coursemate.ui.parseScriptPairs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ClassPageFragment : Fragment() {
@@ -74,6 +77,7 @@ class ClassPageFragment : Fragment() {
 
 
         binding.fabAddTranslation.setOnClickListener { showAddTranslationDialog() }
+        binding.fabBatchTranslation.setOnClickListener { showBatchTranslationDialog() }
         binding.btnEditDescription.setOnClickListener { showDescriptionDialog() }
     }
 
@@ -120,6 +124,29 @@ class ClassPageFragment : Fragment() {
                 val arabic = dialogBinding.etArabic.text?.toString()?.trim().orEmpty()
                 if (bangla.isNotEmpty() || arabic.isNotEmpty()) {
                     viewModel.addTranslation(bangla, arabic)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+            .adjustForKeyboard()
+    }
+
+    private fun showBatchTranslationDialog() {
+        val dialogBinding = DialogBatchTranslationBinding.inflate(layoutInflater)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Add Batch Translations")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Add") { _, _ ->
+                val pairs = parseScriptPairs(dialogBinding.etBatch.text?.toString().orEmpty(), max = 20)
+                if (pairs.isEmpty()) {
+                    Toast.makeText(requireContext(), "No translations detected", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.addTranslations(pairs)
+                    Toast.makeText(
+                        requireContext(),
+                        "Added ${pairs.size} translation${if (pairs.size == 1) "" else "s"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .setNegativeButton("Cancel", null)

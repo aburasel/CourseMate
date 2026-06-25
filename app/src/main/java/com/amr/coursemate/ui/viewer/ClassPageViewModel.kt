@@ -16,6 +16,10 @@ class ClassPageViewModel(private val repository: AppRepository, private val clas
         repository.addTranslation(classId, bangla, arabic)
     }
 
+    fun addTranslations(pairs: List<Pair<String, String>>) = viewModelScope.launch {
+        repository.addTranslations(classId, pairs)
+    }
+
     fun deleteTranslation(translation: Translation) = viewModelScope.launch {
         repository.deleteTranslation(translation)
     }

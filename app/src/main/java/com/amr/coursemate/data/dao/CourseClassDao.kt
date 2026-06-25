@@ -13,6 +13,9 @@ interface CourseClassDao {
     @Query("SELECT * FROM course_classes ORDER BY id ASC")
     suspend fun getAllList(): List<CourseClass>
 
+    @Query("SELECT * FROM course_classes WHERE homework != '' ORDER BY name ASC")
+    fun getClassesWithHomework(): LiveData<List<CourseClass>>
+
     @Query("SELECT * FROM course_classes WHERE id = :id")
     fun getClassById(id: Long): LiveData<CourseClass?>
 
